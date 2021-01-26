@@ -20,10 +20,10 @@ RUN apk --no-cache add libgcc libstdc++ musl py3-dateutil py3-numpy py3-tz py3-s
 # https://pkgs.alpinelinux.org/package/edge/community/x86/py3-scipy
 
 # MATPLOTLIB
-RUN apk --no-cache add freetype libgcc libstdc++ musl py3-cairo py3-certifi py3-cycler py3-dateutil py3-kiwisolver py3-numpy py3-parsing py3-pillow py3-tz python3-tkinter qhull-nonreentrant
+RUN apk --no-cache add freetype libgcc libstdc++ musl py3-cairo py3-certifi py3-cycler py3-dateutil py3-kiwisolver py3-numpy py3-parsing py3-pillow py3-tz python3-tkinter
 
 # extras ??
-libpq libffi-dev musl-dev libressl-dev 
+RUN apk --no-cache add libpq libffi-dev musl-dev libressl-dev 
 
 # PILLOW (needed by matplotlib)
 RUN apk --no-cache add openssl freetype-dev fribidi-dev harfbuzz-dev jpeg-dev lcms2-dev openjpeg-dev tcl-dev tiff-dev tk-dev zlib-dev
@@ -38,6 +38,9 @@ RUN /venv/bin/pip install -r /requirements.txt
 
 # BUILD FINAL IMAGE
 FROM python:3.8-alpine
+
+# This shared library is needed at runtime by pandas and matplotlib
+RUN apk --update add --no-cache libstdc++
 
 # copy venv from build image
 COPY --from=build /venv/ /venv
