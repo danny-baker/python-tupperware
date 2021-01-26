@@ -16,14 +16,14 @@ RUN apk --no-cache add musl openblas
 RUN apk --no-cache add libgcc libstdc++ musl py3-dateutil py3-numpy py3-tz py3-six python3
 
 # SCIPY
-#RUN apk --no-cache add py3-scipy libgcc libgfortran libstdc++ musl openblas py3-numpy-f2py
+RUN apk --no-cache add py3-scipy libgcc libgfortran libstdc++ musl openblas py3-numpy-f2py
 # https://pkgs.alpinelinux.org/package/edge/community/x86/py3-scipy
 
 # MATPLOTLIB
-RUN apk --no-cache add freetype libgcc libstdc++ musl py3-cairo py3-certifi py3-cycler py3-dateutil py3-kiwisolver py3-numpy py3-parsing py3-pillow py3-tz python3-tkinter qhull-nonreentrant
+RUN apk --no-cache add freetype libgcc libstdc++ musl py3-cairo py3-certifi py3-cycler py3-dateutil py3-kiwisolver py3-numpy py3-parsing py3-pillow py3-tz python3-tkinter
 
 # extras ??
-libpq libffi-dev musl-dev libressl-dev 
+RUN apk --no-cache add libpq libffi-dev musl-dev libressl-dev 
 
 # PILLOW (needed by matplotlib)
 RUN apk --no-cache add openssl freetype-dev fribidi-dev harfbuzz-dev jpeg-dev lcms2-dev openjpeg-dev tcl-dev tiff-dev tk-dev zlib-dev
